@@ -11,7 +11,7 @@ bookRouter.get("/books/addBook", addBook);
 bookRouter.get("/books/addBook", addBook);
 
 // deleteBookbyTitle
-bookRouter.get("/books/DeleteTitle", deleteTitle);
+bookRouter.get("/books/deleteTitle", deleteTitle);
 
 // updateBookAuthor
 bookRouter.put("/books/updateBookByAuthor", updateBookByAuthor);

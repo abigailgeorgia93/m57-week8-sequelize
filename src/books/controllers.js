@@ -4,8 +4,7 @@ const Book = require("./model");
 
 const addBook = async (req, res) => {
   try {
-    // try the thing
-    const book = await Book.create({
+        const book = await Book.create({
       title: req.body.title,
       author: req.body.author,
       genre: req.body.genre,
@@ -13,7 +12,6 @@ const addBook = async (req, res) => {
 
     res.status(201).json({ message: "success", book: book });
   } catch (error) {
-    // if error then does something
     res.status(500).json({ message: error.message, error: error });
   }
 };
@@ -30,17 +28,14 @@ const getAllBooks = async (req, res) => {
 };
 
 
-
-
 //deletebookbytitle
 const deleteOne = async (req, res) => {
   try {
     const deletedBook = await Book.destroy({
       where: {
-        title: 'harry potter'
+        title: req.params.title
       },
     });
-
     res.status(202).json({message: "success", deletedBook: deletedBook});
   } catch (error) {
     res.status(500).json({message: error.message, error: error});
@@ -51,7 +46,6 @@ const deleteOne = async (req, res) => {
 const paramsExample = async (req, res) => {
   try {
     console.log("req:params: ", req.params.title);
-
     res.status(200).json({ message: "success", params: req.params });
   } catch (error) {
     res.status(500).json({ message: error.message, error: error });
@@ -59,14 +53,33 @@ const paramsExample = async (req, res) => {
 };
 
 
-//updatebookbyauthor
+//getBooksByGenre
+const getBookByGenre = async (req, res) => {
+  try {
+    const book = await Book.findOne({ where: { genre: req.params.genre }});
+    res.status(200).json({ message: "success", book: book });
+  } catch (error) {
+    res.status(500).json({ message: error.message, error: error });
+  }
+};
+
+//updateBookByAuthor
+const updateBookByAuthor = async (req, res) => {
+  try {
+    const book = await Book.updateOne({ author: req.params.author });
+    res.status(200).json({ message: "success", book: book });
+  } catch (error) {
+    res.status(500).json({ message: error.message, error: error});
+  }
+};
 
 
 module.exports = {
   addBook: addBook,
   getAllBooks: getAllBooks,
-  bringMeAllTheBooks: bringMeAllTheBooks,
-  paramsExample: paramsExample,
   deleteOne: deleteOne,
+  paramsExample: paramsExample,
+  getBookByGenre: getBookByGenre,
+  updateBookByAuthor: updateBookByAuthor,
 };
 
