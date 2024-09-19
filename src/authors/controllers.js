@@ -1,7 +1,7 @@
 const Author = require("./model");
 
 //addAnAuthor
-const addAuthor = async (req. res) => {
+const addAuthor = async (req, res) => {
     try {
         const author = await Author.create({
             name: req.body.name,
