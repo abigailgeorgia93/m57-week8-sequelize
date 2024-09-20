@@ -1,9 +1,18 @@
-const express = require("express");
-const {
-  addAuthor,
-} = require("./controllers");
+const { Router } = require("express");
+const { addAuthor, getAuthorAndBooks } = require("./controllers");
+const authorRouter = Router();
 
-const router = express.Router();
+authorRouter.post("/author/addauthor", addAuthor);
 
-router.post("/authors", addAuthor);
+authorRouter.get("/author/getauthorandbooks/:name", getAuthorAndBooks);
+
+module.exports = authorRouter;
+
+
+//   addAuthor,
+// } = require("./controllers");
+
+// const router = express.Router();
+
+// router.post("/authors", addAuthor);
 
