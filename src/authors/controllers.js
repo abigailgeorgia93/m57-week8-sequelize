@@ -1,4 +1,5 @@
 const Author = require("./model");
+const Book = require("../books/model");
 
 //addAnAuthor
 const addAuthor = async (req, res) => {
@@ -10,4 +11,20 @@ const addAuthor = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message, error });
     }
+};
+
+//getauthorandbooks
+const getAuthorAndBooks = async (req, res) => {
+    const author = await Author.findOne({
+        where: {
+            name: req.params.name,
+        },
+        include: Book,
+    });
+    res.status(200).json({ message: "success", author: author });
+};
+
+module.exports = {
+    addAuthor: addAuthor,
+    getAuthorAndBooks: getAuthorAndBooks,
 };

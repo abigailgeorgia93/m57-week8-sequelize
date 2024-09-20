@@ -17,6 +17,22 @@ const addBook = async (req, res) => {
 };
 
 
+//getauthorandbooks
+const getAuthorAndBooks = async (req, res) => {
+  try{
+    const author = await Author.findOne({
+    where: {
+      name: req.params.name,
+    },
+    include: ({ model:Book })
+    });
+    res.status(201).json({ message: "success", book: book });
+  } catch (error) {
+    res.status(500).json({ message: error.message, error: error });
+  }
+};
+
+
 //getallbooks
 const getAllBooks = async (req, res) => {
   try {
